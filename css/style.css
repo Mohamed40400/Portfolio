@@ -1,26 +1,364 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0a0a14 0%, #1a1a2e 50%, #0a0a14 100%);
-  color: #e0f2fe;
-  overflow-x: hidden;
-  position: relative;
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0a14 0%, #1a1a2e 50%, #0a0a14 100%);
+      color: #e0f2fe;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-#particles-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-/* 👇 KEEP ALL YOUR EXISTING CSS HERE (unchanged) */
-/* hero, cards, animations, etc */
+    .cursor-glow {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      transition: left 0.1s ease, top 0.1s ease;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      text-align: center;
+    }
+
+    .terminal-icon {
+      font-size: 5rem;
+      color: #22d3ee;
+      margin-bottom: 2rem;
+      animation: pulse 2s infinite;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: bold;
+      background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #a855f7 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s ease infinite;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: #67e8f9;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 2rem;
+    }
+
+    .bracket {
+      color: #22d3ee;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      color: #94a3b8;
+    }
+
+    .contact-info a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-info a:hover {
+      color: #22d3ee;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-btn {
+      padding: 1rem;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      border-radius: 0.5rem;
+      color: #22d3ee;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+    }
+
+    .social-btn:hover {
+      background: rgba(51, 65, 85, 0.5);
+      border-color: #22d3ee;
+      transform: scale(1.1);
+      color: #22d3ee;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title .prefix {
+      color: #22d3ee;
+    }
+
+    .cursor-blink {
+      animation: blink 1s infinite;
+    }
+
+    /* Skill Cards */
+    .skill-card {
+      padding: 1.5rem;
+      background: rgba(30, 41, 59, 0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+      height: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(34, 211, 238, 0.5);
+      box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .skill-card h3 {
+      color: #67e8f9;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .skill-card i {
+      color: #22d3ee;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      padding: 0.4rem 0.8rem;
+      background: rgba(15, 23, 42, 0.5);
+      color: #cbd5e1;
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+
+    .skill-tag:hover {
+      border-color: rgba(34, 211, 238, 0.5);
+      color: #67e8f9;
+    }
+
+    /* Experience Cards */
+    .exp-card {
+      padding: 1.5rem;
+      background: rgba(30, 41, 59, 0.4);
+      backdrop-filter: blur(10px);
+      border-left: 4px solid #22d3ee;
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+      margin-bottom: 2rem;
+    }
+
+    .exp-card:hover {
+      border-left-color: #67e8f9;
+      box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+    }
+
+    .exp-card h3 {
+      color: #67e8f9;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .company {
+      color: #22d3ee;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 0.5rem;
+    }
+
+    .period {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .exp-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1rem;
+    }
+
+    .exp-card li {
+      color: #cbd5e1;
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .exp-card li::before {
+      content: "▹";
+      color: #22d3ee;
+      position: absolute;
+      left: 0;
+    }
+
+    /* Project Cards */
+    .project-card {
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.5) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      height: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-card:hover {
+      border-color: #22d3ee;
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(34, 211, 238, 0.2);
+    }
+
+    .project-icon {
+      font-size: 3rem;
+      color: #22d3ee;
+      margin-bottom: 1rem;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover .project-icon {
+      transform: scale(1.1);
+    }
+
+    .project-card h3 {
+      color: #67e8f9;
+      font-size: 1.2rem;
+    }
+
+    /* Education Cards */
+    .edu-card {
+      padding: 1.5rem;
+      background: rgba(30, 41, 59, 0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      border-radius: 0.5rem;
+      transition: all 0.3s;
+      margin-bottom: 1.5rem;
+      height: 100%;
+    }
+
+    .edu-card:hover {
+      border-color: rgba(34, 211, 238, 0.5);
+      box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+    }
+
+    .edu-card h3 {
+      color: #67e8f9;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-card .school {
+      color: #22d3ee;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-card .period {
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(34, 211, 238, 0.2);
+      color: #94a3b8;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Animations */
+    @keyframes gradientShift {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      51%, 100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+      }
+    }
+
+    /* Utility */
+    .bg-dark-transparent {
+      background: rgba(15, 23, 42, 0.3);
+    }
